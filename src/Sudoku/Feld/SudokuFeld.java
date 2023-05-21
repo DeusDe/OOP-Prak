@@ -41,31 +41,18 @@ public class SudokuFeld {
                 quadranten[quadrantenIndex].setFeld(quadranten[quadrantenIndex].getNr(),aktuellesFeld);
                 quadranten[quadrantenIndex].setNr(quadranten[quadrantenIndex].getNr()+1);
 
-                aktuellesFeld.setWert(0);
+                try {
+                    aktuellesFeld.setWert(0);
+                } catch (Exception ignore) {
+                }
             }
         }
 
     }
 
-    public boolean setWert(int zeile, int spalte, int wert) {
-        if(!istWertGueltig(wert)) {
-            return false;//throw new Exception("WertebereichUngueltigException");
-        }
+    public boolean setWert(int zeile, int spalte, int wert) throws Exception{
         if(!istKoordinateGueltig(zeile, spalte)) {
-            return false;//throw new Exception("UngueltigeKoordinatenException");
-        }
-        if(wert == 0) {
-            getFeld(zeile,spalte).setWert(0);
-            return true;
-        }
-        if(zeilen[zeile].istVorhanden(wert)) {
-            return false;//throw new Exception("WertInZeileVorhandenException");
-        }
-        if(spalten[spalte].istVorhanden(wert)) {
-            return false;//throw new Exception("WertInSpalteVorhandenException");
-        }
-        if(quadranten[berechneQuadrantenIndex(zeile, spalte)].istVorhanden(wert)) {
-            return false;//throw new Exception("WertInQuadrantVorhandenException");
+            throw new Exception("UngueltigeKoordinatenException");
         }
         getFeld(zeile,spalte).setWert(wert);
         return true;

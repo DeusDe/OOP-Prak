@@ -32,17 +32,49 @@ public class Feld {
      * Weist dem Feld einen ganzzahligen Wert zu.
      * @param wert Der Wert, der dem Feld zugewiesen wird.
      */
-    public void setWert(int wert) {
-        if(wert < 0 || wert >9) return;
+    public boolean setWert(int wert) throws Exception {
+        if(wert < 0 || wert >9) throw new Exception("WertebereichUngueltigException");
+        if(wert != 0){
+            if(wertInQuadrant(wert)) throw new Exception("WertInQuadrantVorhandenException");
+            if(wertInSpalte(wert)) throw new Exception("WertInSpalteVorhandenException");
+            if(wertInZeile(wert)) throw new Exception("WertInZeileVorhandenException");
+            if(feldBelegt())  throw new Exception("FeldBelegtException");
+        }
         this.wert = wert;
+        return true;
     }
+
+    public boolean wertInQuadrant(int wert){
+        return quadrant.istVorhanden(wert);
+    }
+
+    public boolean wertInZeile(int wert){
+        return zeile.istVorhanden(wert);
+    }
+
+    public boolean wertInSpalte(int wert){
+        return spalte.istVorhanden(wert);
+    }
+
+    public boolean wertInGruppen(int wert){
+        return  wertInSpalte(wert) || wertInQuadrant(wert) || wertInZeile(wert);
+    }
+
+    public boolean wertInBereich(int wert){
+        return wert > 0 && wert < 9;
+    }
+
+    public boolean feldBelegt(){
+        return getWert() > 0;
+    }
+
 
     public Feldgruppe[] getGruppen(){
         return new Feldgruppe[] {zeile,spalte,quadrant};
     }
 
     public boolean wertIstSetzbar(int wert){
-        return (wert > 0 && wert < 9) && !(quadrant.istVorhanden(wert) || spalte.istVorhanden(wert) || zeile.istVorhanden(wert));
+        return (wertInBereich(wert)) && (!wertInGruppen(wert));
     }
 
 

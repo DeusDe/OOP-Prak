@@ -31,27 +31,31 @@ public class StrategieSudoku extends Sudoku {
     private boolean loesenMitEinzelnerOption() {
         boolean weitererFortschritt = false;
 
-        for (int zeile = 0; zeile < feld.getGroesseGruppen(); zeile++) {
-            for (int spalte = 0; spalte < feld.getGroesseGruppen(); spalte++) {
-                if (feld.getWert(zeile,spalte) == 0) {
-                    Set<Integer> moeglicheOptionen = feld.moeglicheWerte(zeile, spalte);
+        for (int zeile = 0; zeile < sudokuFeld.getGroesseGruppen(); zeile++) {
+            for (int spalte = 0; spalte < sudokuFeld.getGroesseGruppen(); spalte++) {
+                if (sudokuFeld.getWert(zeile,spalte) == 0) {
+                    Set<Integer> moeglicheOptionen = sudokuFeld.moeglicheWerte(zeile, spalte);
                     if (moeglicheOptionen.size() == 1) {
                         int loesung = moeglicheOptionen.iterator().next();
-                        feld.setWert(zeile,spalte,loesung);
+                        try{
+                            sudokuFeld.setWert(zeile,spalte,loesung);}
+                        catch (Exception ignored){}
                         weitererFortschritt = true;
                     }
                 }
             }
         }
 
-        for (int zeile = 0; zeile < feld.getGroesseGruppen(); zeile++) {
-            for (int spalte = 0; spalte < feld.getGroesseGruppen(); spalte++) {
-                Feld aktuellesFeld = feld.getFeld(zeile, spalte);
+        for (int zeile = 0; zeile < sudokuFeld.getGroesseGruppen(); zeile++) {
+            for (int spalte = 0; spalte < sudokuFeld.getGroesseGruppen(); spalte++) {
+                Feld aktuellesFeld = sudokuFeld.getFeld(zeile, spalte);
                 if (aktuellesFeld.getWert() == 0) {
-                    Set<Integer> moeglicheOptionen = feld.moeglicheWerte(zeile, spalte);
+                    Set<Integer> moeglicheOptionen = sudokuFeld.moeglicheWerte(zeile, spalte);
                     if (moeglicheOptionen.size() == 1) {
                         int loesung = moeglicheOptionen.iterator().next();
-                        feld.setWert(zeile, spalte, loesung);
+                        try{
+                            sudokuFeld.setWert(zeile, spalte, loesung);}
+                        catch (Exception ignored){}
                         weitererFortschritt = true;
                     }
                 }
@@ -63,10 +67,10 @@ public class StrategieSudoku extends Sudoku {
     private boolean loesenMitGruppen() {
         boolean weitererFortschritt = false;
 
-        for (int zeile = 0; zeile < feld.getGroesseGruppen(); zeile++) {
-            for (int spalte = 0; spalte < feld.getGroesseGruppen(); spalte++) {
-                if (feld.getWert(zeile,spalte) == 0) {
-                    for(Feldgruppe gruppe:feld.getFeld(zeile,spalte).getGruppen()){
+        for (int zeile = 0; zeile < sudokuFeld.getGroesseGruppen(); zeile++) {
+            for (int spalte = 0; spalte < sudokuFeld.getGroesseGruppen(); spalte++) {
+                if (sudokuFeld.getWert(zeile,spalte) == 0) {
+                    for(Feldgruppe gruppe: sudokuFeld.getFeld(zeile,spalte).getGruppen()){
                         int[] feldWerteZaehler = new int[getGroesseGruppen()];
                         for (Feld aktuellesFeld : gruppe.getFelder()) {
                             for (int i = 0; i < getGroesseGruppen(); i++) {
@@ -75,7 +79,9 @@ public class StrategieSudoku extends Sudoku {
                         }
                         for (int i = 0; i < getGroesseGruppen(); i++) {
                             if (feldWerteZaehler[i] == 3) {
-                                feld.setWert(zeile,spalte,i + 1);
+                                try{
+                                    sudokuFeld.setWert(zeile,spalte,i + 1);}
+                                catch (Exception ignored){}
                                 weitererFortschritt = true;
                             }
                         }

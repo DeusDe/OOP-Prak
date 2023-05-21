@@ -1,19 +1,26 @@
 package Sudoku.Lader;
 
 import Sudoku.Feld.Feld;
-import Sudoku.Feld.Feldgruppe;
 import Sudoku.Feld.SudokuFeld;
 
 public abstract class SudokuLader{
 
-    private SudokuFeld feld;
+    private SudokuFeld getSudokuFeld;
 
     protected SudokuLader(){
-        feld = new SudokuFeld(3);
+        getSudokuFeld = new SudokuFeld(3);
     }
     protected boolean zeilenLader(int zeile,int[] werte){
         for(int spalte = 0; spalte < werte.length; spalte++){
-            if(!feld.setWert(zeile,spalte,werte[spalte]))return false;
+            Feld aktuellesFeld = getFeld(zeile,spalte);
+            int aktuellerWert = werte[spalte];
+            if(aktuellesFeld.wertIstSetzbar(aktuellerWert) || aktuellerWert == 0){
+                try {
+                    aktuellesFeld.setWert(aktuellerWert);
+                } catch (Exception ignore) {
+                    return false;
+                }
+            }
         }
         return true;
     }
@@ -25,7 +32,12 @@ public abstract class SudokuLader{
         return true;
     }
 
-    public SudokuFeld getFeld() {
-        return feld;
+    public SudokuFeld getSudokuFeld() {
+        return getSudokuFeld;
     }
+
+    public Feld getFeld(int zeile, int spalte){
+        return getSudokuFeld().getFeld(zeile,spalte);
+    }
+
 }

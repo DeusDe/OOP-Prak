@@ -1,5 +1,6 @@
 package Sudoku.Lösungen;
 
+import Sudoku.Feld.Feld;
 import Sudoku.Sudoku;
 
 public class ProbierSudoku extends Sudoku {
@@ -29,19 +30,24 @@ public class ProbierSudoku extends Sudoku {
             //Wenn das Sudoku in Spalte 9 ist, wird eine Rekursiver aufruf in die nächste zeile in spalte 0 gestartet.
             return loesenRekursiv(zeile + 1, 0);
         }
-        if (feld.getZeilenWert(zeile,spalte) != 0) {
+        if (sudokuFeld.getZeilenWert(zeile,spalte) != 0) {
             //Falls schon ein Wert existiert, wird eine spalten weiter gegangen.
             return loesenRekursiv(zeile, spalte + 1);
         }
-        for (int wert = 1; wert <= feld.getGroesseGruppen(); wert++) {
-            //Überprüft, ob ein wert gesetzt werden kann
-            if (feld.setWert(zeile, spalte, wert)) {
-                //Wenn ein Wert gesetzt werden konnte, wird eine spalten weiter gegangen.
-                if (loesenRekursiv(zeile, spalte + 1)) {
-                    return true;
-                }
+        for (int aktuellerWert = 1; aktuellerWert <= sudokuFeld.getGroesseGruppen(); aktuellerWert++) {
+            //Überprüft, ob ein Wert gesetzt werden kann
+            Feld aktuellesFeld = sudokuFeld.getFeld(zeile,spalte);
+            try {
+                if (!aktuellesFeld.wertInGruppen(aktuellerWert)) {
+                    aktuellesFeld.setWert(aktuellerWert);
+                    //Wenn ein Wert gesetzt werden konnte, wird eine spalten weiter gegangen.
+                    if (loesenRekursiv(zeile, spalte + 1)) {
+                        return true;
+                    }
 
-                feld.setWert(zeile, spalte, 0);
+                    aktuellesFeld.setWert(0);
+                }
+            } catch (Exception ignore) {
             }
         }
         return false;

@@ -1,7 +1,5 @@
 import Sudoku.Ausgabe.ISudokuAnzeige;
-import Sudoku.Feld.Feld;
 import Sudoku.Lader.LaderOptionen;
-import Sudoku.Lader.SudokuLader;
 import Sudoku.Lösungen.ProbierSudoku;
 import Sudoku.Lösungen.StrategieSudoku;
 import Sudoku.Lösungen.ZufallsSudoku;
@@ -133,7 +131,15 @@ public class SudokuFrame extends java.awt.Frame implements ISudokuAnzeige {
                         int eingabeAlsInt = Integer.parseInt(eingabeText);
                         if(sudoku.getSudokuFeld().setWert(finalI,finalY,eingabeAlsInt)) b.setLabel(""+eingabeAlsInt);
                     }catch (Exception e){
-                        return;
+                        switch (e.getMessage()) {
+                            case "FeldBelegtException" -> FEHLER_LABEL.setText("Feld bereits Belegt");
+                            case "WertInZeileVorhandenException" -> FEHLER_LABEL.setText("Wert in Zeile vorhanden");
+                            case "WertInSpalteVorhandenException" -> FEHLER_LABEL.setText("Wert in Spalte vorhanden");
+                            case "WertInQuadrantVorhandenException" -> FEHLER_LABEL.setText("Wert in Quadranten vorhanden");
+                            case "WertebereichUngueltigException" -> FEHLER_LABEL.setText("Wert ist auserhalb des Wertebereichs");
+                            case "UngueltigeKoordinatenException" -> FEHLER_LABEL.setText("Ungueltige Koordinate");
+                            default -> FEHLER_LABEL.setText("Fehlerhafte Eingabe");
+                        }
                     }});
                 b.setFont(new Font("",Font.PLAIN,45));
 

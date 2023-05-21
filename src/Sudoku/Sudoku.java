@@ -7,12 +7,12 @@ import Sudoku.Lader.*;
 import Sudoku.Lösungen.SudokuZustand;
 
 public abstract class Sudoku {
-    protected SudokuFeld feld;
+    protected SudokuFeld sudokuFeld;
     protected SudokuZustand zustand;
     protected long schritte;
 
     public Sudoku() {
-        feld = new LeererLader().getFeld();
+        sudokuFeld = new LeererLader().getSudokuFeld();
         zustand = SudokuZustand.Leer;
     }
 
@@ -20,10 +20,10 @@ public abstract class Sudoku {
 
     public void ladeFeld(LaderOptionen option){
         switch (option) {
-            case Leer -> feld = new LeererLader().getFeld();
-            case Beispiel -> feld = new BeispielLader().getFeld();
-            case Terminal -> feld = new TerminalLader().getFeld();
-            case Zufall -> feld = new ZufallLader(5).getFeld();
+            case Leer -> sudokuFeld = new LeererLader().getSudokuFeld();
+            case Beispiel -> sudokuFeld = new BeispielLader().getSudokuFeld();
+            case Terminal -> sudokuFeld = new TerminalLader().getSudokuFeld();
+            case Zufall -> sudokuFeld = new ZufallLader(5).getSudokuFeld();
         }
 
         schritte = 0;
@@ -39,7 +39,7 @@ public abstract class Sudoku {
 
     public void ueberpruefLoesung(){
         if (zustand == SudokuZustand.Unloesbar)return;
-        for(Feldgruppe aktuellerQuadrant : feld.getQuadranten()){
+        for(Feldgruppe aktuellerQuadrant : sudokuFeld.getQuadranten()){
             if(aktuellerQuadrant.istVorhanden(0)){
                 zustand = SudokuZustand.Unloesbar;
                 return;
@@ -53,7 +53,7 @@ public abstract class Sudoku {
     }
 
     public SudokuFeld getSudokuFeld(){
-        return feld;
+        return sudokuFeld;
     }
 
     public long getSchritte() {
@@ -65,7 +65,7 @@ public abstract class Sudoku {
     }
 
     public int getGroesseGruppen(){
-        return feld.getGroesseGruppen();
+        return sudokuFeld.getGroesseGruppen();
     }
 
     public void setZustand(SudokuZustand zustand) {
