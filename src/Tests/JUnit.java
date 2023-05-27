@@ -1,21 +1,17 @@
 package Tests;
 
+import Sudoku.Exceptions.*;
 import Sudoku.Feld.Feld;
 import Sudoku.Lader.LaderOptionen;
-import Sudoku.Lader.SudokuLader;
-import Sudoku.Lösungen.ProbierSudoku;
-import Sudoku.Lösungen.StrategieSudoku;
 import Sudoku.Lösungen.SudokuZustand;
 import Sudoku.Sudoku;
-import Sudoku.Sudoku.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JUnit {
     @Test
     void erstelle_leeres_sudoku(){
-        Sudoku s = new StrategieSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
@@ -56,7 +52,7 @@ public class JUnit {
 
     @Test
     void setze_und_löse_beispiel_sudoku(){
-        Sudoku s = new ProbierSudoku();
+        Sudoku s = new Sudoku();
         int sudoku[][] = new int[][] {
                 {0,3,0,0,0,0,0,0,0},
                 {0,0,0,1,9,5,0,0,0},
@@ -76,13 +72,13 @@ public class JUnit {
                 }
             }
         }
-        s.loesen();
+        //s.loesen();
         assertEquals(s.getZustand(), SudokuZustand.Geloest);
     }
 
     @Test
     void unloesbares_sudoku(){
-        Sudoku s = new ProbierSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         int sudoku[][] = new int[][] {
                 {1,0,0,0,0,0,0,0,0},
@@ -103,13 +99,13 @@ public class JUnit {
                 }
             }
         }
-        s.loesen();
+        //s.loesen();
         assertEquals(s.getZustand(), SudokuZustand.Unloesbar);
 
     }
 
     void teste_vordefinierte_sudokus(int [][] zuSetzen, int[][] erwartetesErgebnis){
-        Sudoku s = new StrategieSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         for(int i = 0; i < 9; i++){
             for(int y = 0; y < 9; y++){
@@ -122,7 +118,7 @@ public class JUnit {
 
     @Test
     void setze_belegtes_feld(){
-        Sudoku s = new StrategieSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         Feld zuTestendesFeld = s.getSudokuFeld().getFeld(0,0);
         try {
@@ -130,58 +126,57 @@ public class JUnit {
         } catch (Exception ignored) {
         }
         Exception e = assertThrows(Exception.class,() -> zuTestendesFeld.setWert(2));
-        assertTrue(e.getMessage().contains("FeldBelegtException"));
+        assertEquals(e.getClass(), FeldBelegtException.class);
     }
 
     @Test
     void setze_vorhandenen_wert_quadrant(){
-        Sudoku s = new StrategieSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         try {
             s.getSudokuFeld().getFeld(0,0).setWert(1);
         } catch (Exception ignored) {
         }
         Exception e = assertThrows(Exception.class,() -> s.getSudokuFeld().getFeld(1,1).setWert(1));
-        assertTrue(e.getMessage().contains("WertInQuadrantVorhandenException"));
+        assertEquals(e.getClass(), WertInQuadrantVorhandenException.class);
     }
     @Test
     void setze_vorhandenen_wert_Zeile(){
-        Sudoku s = new StrategieSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         try {
             s.getSudokuFeld().getFeld(0,0).setWert(1);
         } catch (Exception ignored) {
         }
         Exception e = assertThrows(Exception.class,() -> s.getSudokuFeld().getFeld(0,5).setWert(1));
-        assertTrue(e.getMessage().contains("WertInZeileVorhandenException"));
+        assertEquals(e.getClass(), WertInZeileVorhandenException.class);
     }
     @Test
     void setze_vorhandenen_wert_spalte(){
-        Sudoku s = new StrategieSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         try {
             s.getSudokuFeld().getFeld(0,0).setWert(1);
         } catch (Exception ignored) {
         }
         Exception e = assertThrows(Exception.class,() -> s.getSudokuFeld().getFeld(5,0).setWert(1));
-        assertTrue(e.getMessage().contains("WertInSpalteVorhandenException"));
+        assertEquals(e.getClass(), WertInSpalteVorhandenException.class);
     }
 
     @Test
     void setze_wert_außerhalb_des_wertebereichs(){
-        Sudoku s = new StrategieSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         Exception e = assertThrows(Exception.class,() -> s.getSudokuFeld().getFeld(0,0).setWert(10));
-        assertTrue(e.getMessage().contains("WertebereichUngueltigException"));
+        assertEquals(e.getClass(), WertebereichUngueltigException.class);
     }
 
     @Test
     void setze_wert_außerhalb_des_feldes(){
-        Sudoku s = new StrategieSudoku();
+        Sudoku s = new Sudoku();
         s.ladeFeld(LaderOptionen.Leer);
         Exception e = assertThrows(Exception.class,() -> s.getSudokuFeld().setWert(10,10,1));
-        System.out.println(e.getMessage());
-        assertTrue(e.getMessage().contains("UngueltigeKoordinatenException"));
+        assertEquals(e.getClass(), UngueltigeKoordinatenException.class);
     }
 
 }

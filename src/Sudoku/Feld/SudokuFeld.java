@@ -1,5 +1,7 @@
 package Sudoku.Feld;
 
+import Sudoku.Exceptions.UngueltigeKoordinatenException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,10 +13,13 @@ public class SudokuFeld {
     private int groesse;
     private int groesseGruppen;
 
+    private static UngueltigeKoordinatenException ungueltigeKoordinatenException = new UngueltigeKoordinatenException();
     public SudokuFeld(int groesse){
 
         this.groesse = groesse;
         this.groesseGruppen = this.groesse * this.groesse;
+
+        //Hier liegt irgendwo der Fehler
 
         quadranten = new Feldgruppe[this.groesseGruppen];
         zeilen = new Feldgruppe[this.groesseGruppen];
@@ -52,7 +57,7 @@ public class SudokuFeld {
 
     public boolean setWert(int zeile, int spalte, int wert) throws Exception{
         if(!istKoordinateGueltig(zeile, spalte)) {
-            throw new Exception("UngueltigeKoordinatenException");
+            throw ungueltigeKoordinatenException;
         }
         getFeld(zeile,spalte).setWert(wert);
         return true;

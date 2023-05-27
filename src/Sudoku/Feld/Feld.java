@@ -1,11 +1,18 @@
 package Sudoku.Feld;
 
+import Sudoku.Exceptions.*;
+
 public class Feld {
     private int wert;
     private final Feldgruppe zeile;
     private final Feldgruppe spalte;
     private Feldgruppe quadrant;
 
+    private static FeldBelegtException feldBelegtException = new FeldBelegtException();
+    private static WertInQuadrantVorhandenException wertInQuadrantVorhandenException = new WertInQuadrantVorhandenException();
+    private static WertInSpalteVorhandenException wertInSpalteVorhandenException = new WertInSpalteVorhandenException();
+    private static WertInZeileVorhandenException wertInZeileVorhandenException = new WertInZeileVorhandenException();
+    private static WertebereichUngueltigException wertebereichUngueltigException = new WertebereichUngueltigException();
 
     /**
      * Erzeugt eine neue Feld-Instanz und weist ihm seine entsprechenden Koordinaten
@@ -33,12 +40,12 @@ public class Feld {
      * @param wert Der Wert, der dem Feld zugewiesen wird.
      */
     public boolean setWert(int wert) throws Exception {
-        if(wert < 0 || wert >9) throw new Exception("WertebereichUngueltigException");
+        if(wert < 0 || wert >9) throw wertebereichUngueltigException;
         if(wert != 0){
-            if(wertInQuadrant(wert)) throw new Exception("WertInQuadrantVorhandenException");
-            if(wertInSpalte(wert)) throw new Exception("WertInSpalteVorhandenException");
-            if(wertInZeile(wert)) throw new Exception("WertInZeileVorhandenException");
-            if(feldBelegt())  throw new Exception("FeldBelegtException");
+            if(wertInQuadrant(wert)) throw wertInQuadrantVorhandenException;
+            if(wertInSpalte(wert)) throw wertInSpalteVorhandenException;
+            if(wertInZeile(wert)) throw wertInZeileVorhandenException;
+            if(feldBelegt())  throw feldBelegtException;
         }
         this.wert = wert;
         return true;

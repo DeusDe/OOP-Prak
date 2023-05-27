@@ -1,18 +1,17 @@
 import Sudoku.Ausgabe.ISudokuAnzeige;
 import Sudoku.Konstanten.Konstanten;
 import Sudoku.Lader.LaderOptionen;
-import Sudoku.Lösungen.ProbierSudoku;
-import Sudoku.Lösungen.StrategieSudoku;
-import Sudoku.Lösungen.ZufallsSudoku;
+import Sudoku.Lösungen.*;
+import Sudoku.Lösungen.Observer.ZustandErzähler;
 import Sudoku.Sudoku;
 
 import java.util.Map;
 import java.util.Scanner;
 
-public class SudokuApp implements ISudokuAnzeige {
+public class SudokuTerminalAnzeige implements ISudokuAnzeige {
 
 
-    Sudoku sudoku = new ProbierSudoku();
+    Sudoku sudoku = new Sudoku();
 
     /**
      * Fügt einen Command mit Kürzeln zur Map hinzu
@@ -35,7 +34,7 @@ public class SudokuApp implements ISudokuAnzeige {
 
 
         Scanner scanner = new Scanner(System.in);
-        SudokuApp app = new SudokuApp();
+        SudokuTerminalAnzeige app = new SudokuTerminalAnzeige();
         while(true){
             System.out.println("Wählen sie eine Lösungsstrategie\n" +
                     "1: Zufall\n" +
@@ -44,9 +43,9 @@ public class SudokuApp implements ISudokuAnzeige {
             int option = scanner.nextInt();
 
             switch (option){
-                case 1 -> app.setSudoku(new ZufallsSudoku());
-                case 3 -> app.setSudoku(new StrategieSudoku());
-                default -> app.setSudoku(new ProbierSudoku());
+                case 1 -> app.setSudoku(new Sudoku());
+                case 3 -> app.setSudoku(new Sudoku());
+                default -> app.setSudoku(new Sudoku());
             }
 
 
@@ -66,7 +65,7 @@ public class SudokuApp implements ISudokuAnzeige {
             }
 
             app.anzeigen();
-            app.getSudoku().loesen();
+            //app.getSudoku().loesen();
             app.anzeigen();
         }
     }
