@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="sudoku">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- Zeilen des Sudoku  !-->
+        <xs:element name="zeile" minOccurs="9" maxOccurs="9">
+          <xs:complexType>
+            <xs:sequence>
+              <!-- Felder des Sudoku  !-->
+              <xs:element name="feld" minOccurs="9" maxOccurs="9">
+                <!-- Attribute des Feldes  !-->
+                <xs:complexType>
+                  <xs:attribute type="xs:unsignedInt" name="wert" use="required"/>
+                  <xs:attribute type="xs:unsignedInt" name="position" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <!-- Attribute der Zeile  !-->
+            <xs:attribute type="xs:unsignedInt" name="position" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
