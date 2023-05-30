@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sudoku>
+    <zeile position="1">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+    <zeile position="2">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+    <zeile position="3">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+    <zeile position="4">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+    <zeile position="5">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+    <zeile position="6">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+    <zeile position="7">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+    <zeile position="8">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+    <zeile position="9">
+        <feld wert="0" position="1"/>
+        <feld wert="0" position="2"/>
+        <feld wert="0" position="3"/>
+        <feld wert="0" position="4"/>
+        <feld wert="0" position="5"/>
+        <feld wert="0" position="6"/>
+        <feld wert="0" position="7"/>
+        <feld wert="0" position="8"/>
+        <feld wert="0" position="9"/>
+    </zeile>
+</sudoku>

@@ -1,8 +1,6 @@
-import Sudoku.Ausgabe.ISudokuAnzeige;
+import Sudoku.Anzeige.ISudokuAnzeige;
 import Sudoku.Konstanten.Konstanten;
-import Sudoku.Lader.LaderOptionen;
-import Sudoku.Lösungen.*;
-import Sudoku.Lösungen.Observer.ZustandErzähler;
+import Sudoku.IO.Lader.LaderOptionen;
 import Sudoku.Sudoku;
 
 import java.util.Map;

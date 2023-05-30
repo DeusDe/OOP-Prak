@@ -1,4 +1,4 @@
-package Sudoku.Ausgabe;
+package Sudoku.Anzeige;
 
 import Sudoku.Lösungen.Observer.ZustandObserver;
 import Sudoku.Sudoku;

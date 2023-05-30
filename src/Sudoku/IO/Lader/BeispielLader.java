@@ -1,8 +1,10 @@
-package Sudoku.Lader;
+package Sudoku.IO.Lader;
+
+import Sudoku.IO.ioWerte;
 
 public class BeispielLader extends SudokuLader{
-    public BeispielLader(){
-        super();
+    public BeispielLader(ioWerte werte){
+        super(werte);
         int[][] beispiel = new int[9][9];
         beispiel[0] = new int[] {0, 3, 0, 0, 0, 0, 0, 0, 0};
         beispiel[1] = new int[] {0, 0, 0, 1, 9, 5, 0, 0, 0};
@@ -14,11 +16,5 @@ public class BeispielLader extends SudokuLader{
         beispiel[7] = new int[] {0, 0, 0, 4, 1, 9, 0, 0, 5};
         beispiel[8] = new int[] {0, 0, 0, 0, 0, 0, 0, 7, 0};
         gesammtLader(beispiel);
-    }
-
-
-    public static void main(String[] args) {
-        BeispielLader bspl = new BeispielLader();
-        System.out.println("test");
     }
 }

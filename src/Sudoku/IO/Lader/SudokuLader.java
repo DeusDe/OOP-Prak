@@ -1,14 +1,17 @@
-package Sudoku.Lader;
+package Sudoku.IO.Lader;
 
 import Sudoku.Feld.Feld;
 import Sudoku.Feld.SudokuFeld;
+import Sudoku.IO.ioWerte;
 
 public abstract class SudokuLader{
 
-    private SudokuFeld getSudokuFeld;
+    private SudokuFeld sudokuFeld;
+    private ioWerte werte;
 
-    protected SudokuLader(){
-        getSudokuFeld = new SudokuFeld(3);
+    protected SudokuLader(ioWerte werte){
+        this.werte = werte;
+        sudokuFeld = new SudokuFeld(3);
     }
     protected boolean zeilenLader(int zeile,int[] werte){
         for(int spalte = 0; spalte < werte.length; spalte++){
@@ -33,7 +36,7 @@ public abstract class SudokuLader{
     }
 
     public SudokuFeld getSudokuFeld() {
-        return getSudokuFeld;
+        return sudokuFeld;
     }
 
     public Feld getFeld(int zeile, int spalte){

@@ -1,11 +1,13 @@
-package Sudoku.Lader;
+package Sudoku.IO.Lader;
 
 import Sudoku.Feld.Feld;
+import Sudoku.IO.ioWerte;
 
 public class ZufallLader extends SudokuLader{
     private final int[] werte = {1,2,3,4,5,6,7,8,9};
-    public ZufallLader(int zufallswerte){
-        super();
+    public ZufallLader(ioWerte werte){
+        super(werte);
+        int zufallswerte = werte.getZufallswerte();
         int zufallGesetzt = 0;
         while(zufallGesetzt <= zufallswerte){
             for(int zeile = 0; zeile < getSudokuFeld().getGroesseGruppen(); zeile++){
@@ -17,7 +19,7 @@ public class ZufallLader extends SudokuLader{
                             try{
                                 aktuellesFeld.setWert(aktuellerWert);
                                 zufallGesetzt++;
-                                if(zufallGesetzt >= 5)return;
+                                if(zufallGesetzt >= zufallswerte)return;
                             }catch (Exception ignore){
 
                             }
@@ -26,10 +28,5 @@ public class ZufallLader extends SudokuLader{
                 }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        ZufallLader zfl = new ZufallLader(5);
-        System.out.println();
     }
 }

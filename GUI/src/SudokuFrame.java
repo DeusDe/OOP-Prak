@@ -1,4 +1,4 @@
-import Sudoku.Ausgabe.ISudokuAnzeige;
+import Sudoku.Anzeige.ISudokuAnzeige;
 import Sudoku.Sudoku;
 import SudokuPanel.SudokuPanel;
 

@@ -1,12 +1,13 @@
-package Sudoku.Lader;
+package Sudoku.IO.Lader;
 
 import Sudoku.Feld.Feld;
+import Sudoku.IO.ioWerte;
 
 import java.util.Scanner;
 
 public class TerminalLader extends SudokuLader{
-    public TerminalLader(){
-        super();
+    public TerminalLader(ioWerte werte){
+        super(werte);
         Scanner scanner = new Scanner(System.in);
 
         int fehlerWerte = 0;
@@ -41,10 +42,4 @@ public class TerminalLader extends SudokuLader{
         }
         System.out.println();
     }
-
-    public static void main(String[] args) {
-        TerminalLader term = new TerminalLader();
-        System.out.println("Test");
-    }
-
 }

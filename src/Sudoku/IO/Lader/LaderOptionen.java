@@ -1,8 +1,9 @@
-package Sudoku.Lader;
+package Sudoku.IO.Lader;
 
 public enum LaderOptionen {
     Beispiel,
     Leer,
     Terminal,
-    Zufall
+    Zufall,
+    XML_Lader
 }

@@ -1,10 +1,11 @@
 package SudokuPanel;
 
-import Sudoku.Lader.LaderOptionen;
+import Sudoku.IO.Lader.LaderOptionen;
 import Sudoku.Sudoku;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 
 public class SettingsPanel extends JPanel {
@@ -20,7 +21,9 @@ public class SettingsPanel extends JPanel {
         // Buttons
         Button laderSetzen = new Button("Laden");
         Button sudokuLösen = new Button("Lösen");
-
+        Button setLoadFile = new Button("Datei Laden");
+        Button setSaveFile = new Button("Datei Speichern");
+        Button speichern = new Button("Speichern");
         // Choices
         Choice lösungen = new Choice();
         lösungen.add("Probier");
@@ -31,6 +34,7 @@ public class SettingsPanel extends JPanel {
         lader.add("Leer");
         lader.add("Beispiel");
         lader.add("Zufall");
+        lader.add("XML");
 
         // Action Listeners
         sudokuLösen.addActionListener(e -> {
@@ -48,6 +52,30 @@ public class SettingsPanel extends JPanel {
             sudoku.ladeFeld(option);
             this.field.updateFieldTexts();
         });
+
+        //FileChooser
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setDialogTitle("Wähle eine Datei aus");
+        fileChooser.setSize(new Dimension(1000,400));
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setCurrentDirectory(new File("/Users/privat/Downloads/OOP-Prak/xml"));
+        setLoadFile.addActionListener(e -> {
+            int returnVal = fileChooser.showOpenDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                sudoku.setLaderPath(fileChooser.getSelectedFile().getAbsolutePath());
+                sudoku.ladeFeld(LaderOptionen.XML_Lader);
+                this.field.updateFieldTexts();
+            }
+        });
+        setSaveFile.addActionListener(e -> {
+            int returnVal = fileChooser.showSaveDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                sudoku.setSavePath(fileChooser.getSelectedFile().getAbsolutePath());
+                sudoku.speichern();
+            }
+        });
+
 
         // Labels
         Label status = new Label();
@@ -78,18 +106,26 @@ public class SettingsPanel extends JPanel {
 
         gbc.gridx = 2;
         gbc.gridy = 0;
-        add(lösungen, gbc);
+        add(setLoadFile, gbc);
 
         gbc.gridx = 2;
         gbc.gridy = 1;
-        add(sudokuLösen, gbc);
+        add(setSaveFile, gbc);
 
         gbc.gridx = 3;
+        gbc.gridy = 0;
+        add(lösungen, gbc);
+
+        gbc.gridx = 3;
+        gbc.gridy = 1;
+        add(sudokuLösen, gbc);
+
+        gbc.gridx = 4;
         gbc.gridy = 0;
 
         add(fehler, gbc);
 
-        gbc.gridx = 3;
+        gbc.gridx = 4;
         gbc.gridy = 1;
 
         add(status, gbc);

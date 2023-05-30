@@ -1,11 +1,14 @@
 package Sudoku;
 
 
-import Sudoku.Exceptions.*;
 import Sudoku.Feld.Feld;
 import Sudoku.Feld.Feldgruppe;
 import Sudoku.Feld.SudokuFeld;
-import Sudoku.Lader.*;
+import Sudoku.IO.Ausgabe.Ausgabe;
+import Sudoku.IO.Ausgabe.AusgabeXml;
+import Sudoku.IO.Lader.*;
+import Sudoku.IO.ioWerte;
+import Sudoku.IO.Lader.*;
 import Sudoku.Lösungen.Observer.ZustandErzähler;
 import Sudoku.Lösungen.Observer.ZustandObserver;
 import Sudoku.Lösungen.Probier;
@@ -22,10 +25,11 @@ public class Sudoku implements ZustandErzähler {
     protected SudokuFeld sudokuFeld;
     protected SudokuZustand zustand;
     public long schritte;
+    private ioWerte werte = new ioWerte();
 
     public Sudoku() {
         this.zustandObserverListe = new ArrayList<>();
-        sudokuFeld = new LeererLader().getSudokuFeld();
+        sudokuFeld = new LeererLader(werte).getSudokuFeld();
         setZustand(SudokuZustand.Leer);
     }
 
@@ -37,10 +41,11 @@ public class Sudoku implements ZustandErzähler {
 
     public void ladeFeld(LaderOptionen option){
         switch (option) {
-            case Leer -> sudokuFeld = new LeererLader().getSudokuFeld();
-            case Beispiel -> sudokuFeld = new BeispielLader().getSudokuFeld();
-            case Terminal -> sudokuFeld = new TerminalLader().getSudokuFeld();
-            case Zufall -> sudokuFeld = new ZufallLader(5).getSudokuFeld();
+            case Leer -> sudokuFeld = new LeererLader(werte).getSudokuFeld();
+            case Beispiel -> sudokuFeld = new BeispielLader(werte).getSudokuFeld();
+            case Terminal -> sudokuFeld = new TerminalLader(werte).getSudokuFeld();
+            case XML_Lader -> sudokuFeld = new XMLLader(werte).getSudokuFeld();
+            case Zufall -> sudokuFeld = new ZufallLader(werte).getSudokuFeld();
         }
 
         schritte = 0;
@@ -123,5 +128,26 @@ public class Sudoku implements ZustandErzähler {
         for (ZustandObserver obj : zustandObserverListe) {
             obj.update(this.zustand);
         }
+    }
+
+    public void setLaderPath(String path){
+        this.werte.setLoad_path(path);
+    }
+
+    public String getLaderPath(){
+        return this.werte.getLoad_path();
+    }
+
+    public void setSavePath(String path){
+        this.werte.setSave_path(path);
+    }
+
+    public String getSavePath(String path){
+        return this.werte.getSave_path();
+    }
+
+
+    public void speichern() {
+        new AusgabeXml(getSudokuFeld(),werte);
     }
 }

@@ -2,7 +2,7 @@ package Tests;
 
 import Sudoku.Exceptions.*;
 import Sudoku.Feld.Feld;
-import Sudoku.Lader.LaderOptionen;
+import Sudoku.IO.Lader.LaderOptionen;
 import Sudoku.Lösungen.SudokuZustand;
 import Sudoku.Sudoku;
 import org.junit.jupiter.api.Test;

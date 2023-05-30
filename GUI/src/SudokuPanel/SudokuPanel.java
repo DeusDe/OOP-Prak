@@ -1,6 +1,6 @@
 package SudokuPanel;
 
-import Sudoku.Lader.LaderOptionen;
+import Sudoku.IO.Lader.LaderOptionen;
 import Sudoku.Sudoku;
 
 import javax.swing.*;
