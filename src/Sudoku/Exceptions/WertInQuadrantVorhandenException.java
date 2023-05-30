@@ -1,4 +1,4 @@
 package Sudoku.Exceptions;
 
-public class WertInQuadrantVorhandenException extends WertInGruppeVorhanden{
+public class WertInQuadrantVorhandenException extends WertVorhandenException {
 }

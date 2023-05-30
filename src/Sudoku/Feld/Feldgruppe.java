@@ -51,13 +51,13 @@ public class Feldgruppe {
     }
 
     public boolean istVorhanden(int wert) {
-        for(int feldIndex = 0; feldIndex < groesse; feldIndex++){
-            if(getFeld(feldIndex).getWert() == wert){
-                //Falls der Wert gefunden wurde return True,
+        for (Feld feld : felder) {
+            if (feld.getWert() == wert) {
+                // Falls der Wert gefunden wurde, return true.
                 return true;
             }
         }
-        //Ansonsten False.
+        // Ansonsten false.
         return false;
     }
 

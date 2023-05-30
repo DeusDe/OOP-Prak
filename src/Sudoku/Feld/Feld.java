@@ -6,25 +6,25 @@ public class Feld {
     private int wert;
     private final Feldgruppe zeile;
     private final Feldgruppe spalte;
-    private Feldgruppe quadrant;
+    private final Feldgruppe quadrant;
 
-    private static FeldBelegtException feldBelegtException = new FeldBelegtException();
-    private static WertInQuadrantVorhandenException wertInQuadrantVorhandenException = new WertInQuadrantVorhandenException();
-    private static WertInSpalteVorhandenException wertInSpalteVorhandenException = new WertInSpalteVorhandenException();
-    private static WertInZeileVorhandenException wertInZeileVorhandenException = new WertInZeileVorhandenException();
-    private static WertebereichUngueltigException wertebereichUngueltigException = new WertebereichUngueltigException();
+    private static final FeldBelegtException feldBelegtException = new FeldBelegtException();
+    private static final WertInQuadrantVorhandenException wertInQuadrantVorhandenException = new WertInQuadrantVorhandenException();
+    private static final WertInSpalteVorhandenException wertInSpalteVorhandenException = new WertInSpalteVorhandenException();
+    private static final WertInZeileVorhandenException wertInZeileVorhandenException = new WertInZeileVorhandenException();
+    private static final WertebereichUngueltigException wertebereichUngueltigException = new WertebereichUngueltigException();
 
     /**
      * Erzeugt eine neue Feld-Instanz und weist ihm seine entsprechenden Koordinaten
      * in Form von Zeile, Spalte und Quadrant zu
-     * @param neueSpalte Die Spalte, in der das Feld liegt.
-     * @param neueZeile Die Zeile, in der das Feld liegt.
-     * @param neuerQuadrant Der Quadrant, in dem das Feld liegt.
+     * @param spalte Die Spalte, in der das Feld liegt.
+     * @param zeile Die Zeile, in der das Feld liegt.
+     * @param quadrant Der Quadrant, in dem das Feld liegt.
      */
-    public Feld(Feldgruppe neueSpalte, Feldgruppe neueZeile, Feldgruppe neuerQuadrant) {
-        this.zeile = neueZeile;
-        this.spalte = neueSpalte;
-        this.quadrant = neuerQuadrant;
+    public Feld(Feldgruppe spalte, Feldgruppe zeile, Feldgruppe quadrant) {
+        this.zeile = zeile;
+        this.spalte = spalte;
+        this.quadrant = quadrant;
     }
 
     /**
@@ -35,18 +35,20 @@ public class Feld {
         return this.wert;
     }
 
+    private void validateFeldWert(int wert) throws WertVorhandenException {
+        if(feldBelegt()) throw feldBelegtException;
+        if(wertInQuadrant(wert))throw wertInQuadrantVorhandenException;
+        if(wertInSpalte(wert))throw wertInSpalteVorhandenException;
+        if(wertInZeile(wert))throw wertInZeileVorhandenException;
+    }
+
     /**
      * Weist dem Feld einen ganzzahligen Wert zu.
      * @param wert Der Wert, der dem Feld zugewiesen wird.
      */
     public boolean setWert(int wert) throws Exception {
         if(wert < 0 || wert >9) throw wertebereichUngueltigException;
-        if(wert != 0){
-            if(wertInQuadrant(wert)) throw wertInQuadrantVorhandenException;
-            if(wertInSpalte(wert)) throw wertInSpalteVorhandenException;
-            if(wertInZeile(wert)) throw wertInZeileVorhandenException;
-            if(feldBelegt())  throw feldBelegtException;
-        }
+        if(wert != 0) validateFeldWert(wert);
         this.wert = wert;
         return true;
     }
@@ -68,7 +70,7 @@ public class Feld {
     }
 
     public boolean wertInBereich(int wert){
-        return wert > 0 && wert < 9;
+        return wert > 0 && wert <= 9;
     }
 
     public boolean feldBelegt(){

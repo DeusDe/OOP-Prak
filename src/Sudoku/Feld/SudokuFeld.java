@@ -120,8 +120,6 @@ public class SudokuFeld {
             }
         }
 
-        //TODO Duplikate Entfernen
-
         return finaleOptionen;
     }
 }

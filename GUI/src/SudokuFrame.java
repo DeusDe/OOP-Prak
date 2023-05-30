@@ -19,7 +19,7 @@ public class SudokuFrame extends JFrame implements ISudokuAnzeige {
 
         add(p1, "North");
 
-        this.setMinimumSize(new Dimension(900,900));
+        this.setMinimumSize(new Dimension(1000,1000));
     }
     @Override
     public Sudoku getSudoku() {

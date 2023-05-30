@@ -72,7 +72,7 @@ public class JUnit {
                 }
             }
         }
-        //s.loesen();
+        s.loesen("probier");
         assertEquals(s.getZustand(), SudokuZustand.Geloest);
     }
 
@@ -99,7 +99,7 @@ public class JUnit {
                 }
             }
         }
-        //s.loesen();
+        s.loesen("probier");
         assertEquals(s.getZustand(), SudokuZustand.Unloesbar);
 
     }

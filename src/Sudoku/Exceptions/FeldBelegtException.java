@@ -1,4 +1,4 @@
 package Sudoku.Exceptions;
 
-public class FeldBelegtException extends Exception{
+public class FeldBelegtException extends WertVorhandenException{
 }

@@ -34,7 +34,6 @@ public class SettingsPanel extends JPanel {
 
         // Action Listeners
         sudokuLösen.addActionListener(e -> {
-            System.out.println(lösungen.getSelectedItem());
             sudoku.loesen(lösungen.getSelectedItem());
             this.field.updateFieldTexts();
         });
@@ -52,7 +51,7 @@ public class SettingsPanel extends JPanel {
 
         // Labels
         Label status = new Label();
-        Label fehler = new Label();
+        fehler = new Label();
 
         // Spinner
         spinner = new JSpinner();
@@ -87,11 +86,15 @@ public class SettingsPanel extends JPanel {
 
         gbc.gridx = 3;
         gbc.gridy = 0;
-        add(status, gbc);
+
+        add(fehler, gbc);
 
         gbc.gridx = 3;
         gbc.gridy = 1;
-        add(fehler, gbc);
+
+        add(status, gbc);
+
+        setFehlerText("Aktuell keine Fehler vorhanden");
     }
 
     public void setField(SudokuField field) {
@@ -108,6 +111,7 @@ public class SettingsPanel extends JPanel {
 
     public void setFehlerText(String text) {
         fehler.setText(text);
+        revalidate();
     }
 
 }
