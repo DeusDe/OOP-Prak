@@ -34,7 +34,6 @@ public class SettingsPanel extends JPanel {
         lader.add("Leer");
         lader.add("Beispiel");
         lader.add("Zufall");
-        lader.add("XML");
 
         // Action Listeners
         sudokuLösen.addActionListener(e -> {

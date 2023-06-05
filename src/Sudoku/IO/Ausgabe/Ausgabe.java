@@ -8,11 +8,20 @@ public abstract class Ausgabe {
     protected SudokuFeld sudokuFeld;
     protected ioWerte werte;
 
+    /**
+     * Konstruktor um das sudoku auszugeben
+     * @param sudokuFeld
+     * @param werte
+     */
     protected Ausgabe(SudokuFeld sudokuFeld, ioWerte werte){
         this.sudokuFeld = sudokuFeld;
         this.werte = werte;
     }
 
+    /**
+     * Gibt das SudokuFeld als integer Array zurück
+     * @return
+     */
     int[][] feldAlsIntArray(){
         int [][] feld = new int[9][9];
         for(int zeile = 0; zeile < 9; zeile++){

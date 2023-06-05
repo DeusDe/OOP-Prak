@@ -19,7 +19,14 @@ import javax.xml.validation.Validator;
 
 public class XMLLader extends SudokuLader{
     private Document doc;
-    private final String VALIDATION_FILE = "/Users/privat/Downloads/OOP-Prak/xml/sudokuSchema.xsd";
+    private final String VALIDATION_FILE = "/Users/privat/Downloads/OOP-Prak/xml/schema/sudokuSchema.xsd";
+
+
+    /**
+     * Konstruktor um ein XML Dokument zu laden
+     * @param werte
+     * @param path
+     */
     public void loadFile(String path){
 
         try{
@@ -49,6 +56,10 @@ public class XMLLader extends SudokuLader{
         }
     }
 
+    /**
+     * Erstellt aus dem Dokument ein SudokuFeld
+     * @return
+     */
     public int[][] erstelleFeldVonDokument(){
         int [][] feld =  new int[9][9];
         //Falls das Document nicht erstellt wurde wird ein Leeres Feld zurückgegeben
@@ -66,6 +77,10 @@ public class XMLLader extends SudokuLader{
 
     }
 
+    /**
+     * Konstruktor um ein SudokuFeld aus einer XML Datei zu erstellen
+     * @param werte
+     */
     public XMLLader(ioWerte werte){
         super(werte);
         loadFile(werte.getLoad_path());

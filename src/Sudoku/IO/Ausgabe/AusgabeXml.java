@@ -8,8 +8,8 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -21,19 +21,27 @@ public class AusgabeXml extends Ausgabe{
 
     Document doc;
 
+    /**
+     * Konstruktor um aus dem SudokuFeld ein XML Dokument zu erstellen
+     * @param sudokuFeld
+     * @param werte
+     */
     public AusgabeXml(SudokuFeld sudokuFeld, ioWerte werte) {
         super(sudokuFeld, werte);
-        int[][] feld = feldAlsIntArray();
         try {
             feldZuXML();
-            XMLzuDatei();
+            xmlZuDatei();
         } catch (ParserConfigurationException | TransformerException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
 
-    private void feldZuXML() throws ParserConfigurationException, TransformerConfigurationException {
+    /**
+     * Erstellt aus dem SudokuFeld ein XML Dokument
+     * @throws ParserConfigurationException
+     */
+    private void feldZuXML() throws ParserConfigurationException {
 
 
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -57,15 +65,25 @@ public class AusgabeXml extends Ausgabe{
         }
     }
 
+    /**
+     * Erstellt den Speicherpfad, falls dieser nicht mit .xml endet
+     */
     private void erstelleSpeicherPfad(){
         if(!werte.getSave_path().endsWith(".xml")){
             werte.setSave_path(werte.getSave_path() + ".xml");
         }
     }
 
-    private void XMLzuDatei() throws TransformerException, FileNotFoundException {
+
+    /**
+     * Speichert das Dokument in eine Datei
+     * @throws TransformerException
+     * @throws FileNotFoundException
+     */
+    private void xmlZuDatei() throws TransformerException, FileNotFoundException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         DOMSource source = new DOMSource(doc);
         erstelleSpeicherPfad();
         StreamResult result = new StreamResult(new FileOutputStream(werte.getSave_path()));
